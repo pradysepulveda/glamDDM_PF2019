@@ -68,21 +68,6 @@ def compute_p_choose_best(df):
     return df.groupby('subject').best_chosen.mean().values
 
 
-# Modification for dislike case (PS mod. May 2019)
-def compute_p_choose_worst(df):
-    """
-    Computes subject wise P(choose best)
-    """
-    if 'best_chosen' not in df.columns:
-        values = df[[c for c in df.columns if c.startswith('item_value')]].values
-        choices = df['choice'].values
-        # Best chosen in this case is the opposite to the best option, given that we have only two alternatives 
-        best_chosen = (values.argmax(axis=1) != choices).astype('int')
-        df['best_chosen'] = best_chosen
-    return df.groupby('subject').best_chosen.mean().values
-
-
-
 def run_linear_model(x, y, verbose=True):
 
     X = sm.add_constant(x)
