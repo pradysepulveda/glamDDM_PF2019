@@ -42,7 +42,7 @@ class GLAM(object):
         subjects = np.unique(self.data['subject'])
 
         for s, subject in enumerate(subjects):
-
+            
             if self.type is 'individual':
                 parameters = [self.estimates[s].get(parameter)
                               for parameter in ['v', 'gamma', 's', 'tau', 't0']]
@@ -75,6 +75,7 @@ class GLAM(object):
                                                                   boundary=boundary,
                                                                   error_weight=error_weight,
                                                                   error_range=error_range)
+
             prediction = pd.concat([prediction, subject_prediction])
 
         self.prediction = prediction

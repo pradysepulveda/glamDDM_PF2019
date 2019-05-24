@@ -11,7 +11,7 @@ def plot_fit(data, predictions, color_data = '#4F6A9A' ):
     fig, axs = plt.subplots(2, 2, figsize=(15, 15))
     sns.set(style='white', font_scale=1.5)
     plot_rt_by_difficulty_zSc(data, predictions,
-                          xlims =(0, 150), xlabel_skip=2,color1 = color_data ,
+                          xlims =(0, 3000), xlabel_skip=2,color1 = color_data ,
                           ax=axs[0][0])
     plot_pleft_by_left_minus_mean_others(data, predictions,
                                          xlabel_skip=5, xlims=[-100, 100], xlabel_start=0,color1 = color_data, ax=axs[0][1])
