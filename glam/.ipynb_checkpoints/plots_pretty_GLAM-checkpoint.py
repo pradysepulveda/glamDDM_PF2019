@@ -9,10 +9,10 @@ sns.set(color_codes=True)
 
 ## PSD mod : To adjust our presentation I inverted the rating presentation from right to left. HOwever, the variables are still labelled as left_minus_right 
 
-def plot_fit(data, predictions, color_data = '#4F6A9A',label1 = 'More',label2 = 'GLAM Simulations'):
+def plot_fit(data, predictions, color_data = '#4F6A9A',label1 = 'More',label2 = 'aDDM Simulations'):
     fig, axs = plt.subplots(2, 2, figsize=(15, 15))
     sns.set(style='white', font_scale=1.5)
-    plot_rt_by_difficulty(data, predictions,
+    plot_rt_by_difficulty_zSc(data, predictions,
                           xlims =(0, 50), xlabel_skip=2,color1 = color_data ,
                           ax=axs[0][0])
     plot_pleft_by_left_minus_mean_others(data, predictions,
@@ -146,7 +146,7 @@ def plot_rt_by_difficulty(data, predictions=None, ax=None, xlims=(1.5, 8.5), xla
         else:  # plot predictions
             ax.plot(x, means, '--o', markerfacecolor=c_pred[i],color=c_pred[i], linewidth=2.5, markersize = 10)
 
-    ax.set_ylim(0, 5000)
+    #ax.set_ylim(0, 5000)
     ax.set_xlabel('|$ΔDots_{Bins}$|')
     ax.set_ylabel('RT (ms)')
     ax.set_xticks(x[::xlabel_skip])
