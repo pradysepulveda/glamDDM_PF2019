@@ -27,11 +27,18 @@ def plot_fit(data, predictions, color_data = '#4F6A9A',label1 = 'More',label2 = 
    #     ax.text(-0.15, 1.175, label, transform=ax.transAxes,
    #             fontsize=16, fontweight='bold', va='top')
 
-
+    fsize = 30
+    
+    for axis1 in [axs[0][0],axs[0][1],axs[1][0],axs[1][1]]:
+        axis1.xaxis.label.set_fontsize(fontsize = fsize) # x label
+        axis1.yaxis.label.set_fontsize(fontsize = fsize) # Y label
+        axis1.tick_params(axis="x", labelsize=20)
+        axis1.tick_params(axis="y", labelsize=20)
+        
     patch1 = mpatches.Patch(facecolor=color_data,hatch=r'//', label = label1)
     patch2 = mpatches.Patch(facecolor='#606060',hatch=r'//', label = label2)
 
-    leg = plt.legend(handles=[patch1,patch2],fontsize=14,loc = 'lower right')
+    leg = plt.legend(handles=[patch1,patch2],fontsize=25,loc = 'lower right')
     leg.get_frame().set_facecolor('none')
     leg.get_frame().set_linewidth(0.0)
 
