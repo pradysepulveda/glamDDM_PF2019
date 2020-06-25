@@ -13,10 +13,10 @@ def plot_fit(data, predictions, color_data = '#4F6A9A',label1 = 'More',label2 = 
     fig, axs = plt.subplots(2, 2, figsize=(15, 15))
     sns.set(style='white', font_scale=1.5)
     plot_rt_by_difficulty(data, predictions,
-                          xlims =(0, 50), xlabel_skip=2,color1 = color_data ,
+                          xlims =(-500, 500), xlabel_skip=1,color1 = color_data ,
                           ax=axs[0][0])
     plot_pleft_by_left_minus_mean_others(data, predictions,
-                                         xlabel_skip=5, xlims=[-100, 100], xlabel_start=0,color1 = color_data, ax=axs[0][1])
+                                         xlabel_skip=2, xlims=[-100, 100], xlabel_start=0,color1 = color_data, ax=axs[0][1])
     plot_pleft_by_left_gaze_advantage(data, predictions,color1 = color_data,
                                       ax=axs[1][0])
     plot_corpleft_by_left_gaze_advantage(data, predictions, color1 = color_data,
@@ -27,11 +27,19 @@ def plot_fit(data, predictions, color_data = '#4F6A9A',label1 = 'More',label2 = 
    #     ax.text(-0.15, 1.175, label, transform=ax.transAxes,
    #             fontsize=16, fontweight='bold', va='top')
 
+    fsize = 30
 
+
+    for axis1 in [axs[0][0],axs[0][1],axs[1][0],axs[1][1]]:
+        axis1.xaxis.label.set_fontsize(fontsize = fsize) # x label
+        axis1.yaxis.label.set_fontsize(fontsize = fsize) # Y label
+        axis1.tick_params(axis="x", labelsize=20)
+        axis1.tick_params(axis="y", labelsize=20)
+        
     patch1 = mpatches.Patch(facecolor=color_data,hatch=r'//', label = label1)
     patch2 = mpatches.Patch(facecolor='#606060',hatch=r'//', label = label2)
 
-    leg = plt.legend(handles=[patch1,patch2],fontsize=14,loc = 'lower right')
+    leg = plt.legend(handles=[patch1,patch2],fontsize=25,loc = 'lower right')
     leg.get_frame().set_facecolor('none')
     leg.get_frame().set_linewidth(0.0)
 
@@ -61,7 +69,7 @@ def add_difficulty(df):
     values = df[value_cols].values
     values_sorted = np.sort(values, axis=1)
     difficulty = values_sorted[:, -1] - np.mean(values_sorted[:, :-1], axis=1)
-
+    print (difficulty)
 
     levels =  (np.max(difficulty) - np.min(difficulty))/10
 
@@ -116,6 +124,7 @@ def plot_rt_by_difficulty(data, predictions=None, ax=None, xlims=(1.5, 8.5), xla
         # Compute summary statistics
         subject_means = df.groupby(['subject', 'difficulty']).rt.mean()
         means = subject_means.groupby('difficulty').mean()[xlims[0]:xlims[1]]
+        print(means)
         sems = subject_means.groupby('difficulty').sem()[xlims[0]:xlims[1]]
 
         x = np.arange(len(means))
